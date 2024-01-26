@@ -6,3 +6,9 @@ class User(BaseModel):
     email: str | None = None
     full_name: str | None = None
     is_active: bool | None = None
+
+
+class UserRegister(BaseModel):
+    username: str
+    email: str
+    password: str
