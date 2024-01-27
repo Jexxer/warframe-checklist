@@ -4,7 +4,12 @@ from typing import Annotated
 from auth.constants import ACCESS_TOKEN_EXPIRE_MINUTES
 from auth.exceptions import EmailAlreadyExists, InvalidCredentials, UserAlreadyExists
 from auth.schemas import Token
-from auth.utils import authenticate_user, create_access_token, get_password_hash
+from auth.utils import (
+    authenticate_user,
+    create_access_token,
+    get_current_active_user,
+    get_password_hash,
+)
 from database import db_session
 from fastapi import APIRouter, Depends, Response
 from fastapi.security import OAuth2PasswordRequestForm
@@ -14,7 +19,15 @@ from users.schemas import UserRegister
 router = APIRouter()
 
 
-@router.post("/token")
+@router.get("/token/")
+def is_token_valid(
+    current_user: Annotated[UserModel, Depends(get_current_active_user)],
+):
+    if current_user:
+        return {"valid": True}
+
+
+@router.post("/token/")
 async def login_for_access_token(
     response: Response,
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],

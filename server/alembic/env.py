@@ -1,15 +1,22 @@
+import os
 from logging.config import fileConfig
 
 from alembic import context
+from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
 from src.database import Base
+from src.tasks.models import *
 from src.users.models import *
+
+load_dotenv()
 
 # ? For whatever reason, importing the models but not using them allows alembic to detect them.
 
+connection_string = os.getenv("SQLALCHEMY_DATABASE_URL")
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+config.set_main_option("sqlalchemy.url", connection_string)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

@@ -12,6 +12,7 @@ const page = (props: Props) => {
     id: "",
     email: "",
     is_active: null,
+    username: "",
   });
 
   useEffect(() => {
@@ -36,9 +37,9 @@ const page = (props: Props) => {
     isAuthenticated && (
       <div>
         <Link href="/login">Login</Link>
-        <div>id: {user.id}</div>
         <div>email: {user.email}</div>
-        <div>is_active: {user.is_active}</div>
+        <div>username: {user.username}</div>
+        <div>is_active: {user.is_active ? "true" : "false"}</div>
       </div>
     )
   );
