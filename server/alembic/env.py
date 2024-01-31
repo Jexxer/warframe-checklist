@@ -1,10 +1,12 @@
 import os
+import sys
 from logging.config import fileConfig
 
 from alembic import context
 from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
 from src.database import Base
+from src.gamedata.models import *
 from src.tasks.models import *
 from src.users.models import *
 

@@ -1,8 +1,9 @@
-from auth.router import router as authRouter
-from database import Base, SessionLocal, engine
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from users.router import router as usersRouter
+from src.auth.router import router as authRouter
+from src.database import Base, SessionLocal, engine
+from src.gamedata.router import router as gamedataRouter
+from src.users.router import router as usersRouter
 
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
@@ -31,6 +32,7 @@ app.add_middleware(
 
 app.include_router(authRouter)
 app.include_router(usersRouter)
+app.include_router(gamedataRouter)
 
 
 @app.get("/")

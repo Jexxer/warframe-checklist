@@ -1,0 +1,1 @@
+IMAGE_BASE_URL = "https://cdn.warframestat.us/img/"

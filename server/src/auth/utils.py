@@ -1,18 +1,18 @@
 from datetime import datetime, timedelta, timezone
 from typing import Annotated, Optional
 
-from auth.config import ALGORITHM, SECRET_KEY
-from auth.exceptions import InactiveUser, InvalidCredentials
-from auth.schemas import TokenData
-from database import db_session
 from fastapi import Depends, Request
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from fastapi.security import OAuth2
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from users.models import User as UserModel
-from users.schemas import User as UserSchema
+from src.auth.config import ALGORITHM, SECRET_KEY
+from src.auth.exceptions import InactiveUser, InvalidCredentials
+from src.auth.schemas import TokenData
+from src.database import db_session
+from src.users.models import User as UserModel
+from src.users.schemas import User as UserSchema
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 

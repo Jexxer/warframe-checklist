@@ -1,8 +1,8 @@
 from typing import Annotated
 
-from auth.utils import get_current_active_user
 from fastapi import APIRouter, Depends
-from users.schemas import User
+from src.auth.utils import get_current_active_user
+from src.users.schemas import User
 
 router = APIRouter()
 

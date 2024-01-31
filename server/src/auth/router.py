@@ -1,20 +1,24 @@
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
-from auth.constants import ACCESS_TOKEN_EXPIRE_MINUTES
-from auth.exceptions import EmailAlreadyExists, InvalidCredentials, UserAlreadyExists
-from auth.schemas import Token
-from auth.utils import (
+from fastapi import APIRouter, Depends, Response
+from fastapi.security import OAuth2PasswordRequestForm
+from src.auth.constants import ACCESS_TOKEN_EXPIRE_MINUTES
+from src.auth.exceptions import (
+    EmailAlreadyExists,
+    InvalidCredentials,
+    UserAlreadyExists,
+)
+from src.auth.schemas import Token
+from src.auth.utils import (
     authenticate_user,
     create_access_token,
     get_current_active_user,
     get_password_hash,
 )
-from database import db_session
-from fastapi import APIRouter, Depends, Response
-from fastapi.security import OAuth2PasswordRequestForm
-from users.models import User as UserModel
-from users.schemas import UserRegister
+from src.database import db_session
+from src.users.models import User as UserModel
+from src.users.schemas import UserRegister
 
 router = APIRouter()
 
