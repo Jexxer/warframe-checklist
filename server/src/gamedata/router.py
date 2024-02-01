@@ -27,6 +27,9 @@ def create_glyphs(glyphs: Union[GlyphSchema, List[GlyphSchema]], db: db_session)
         db_item = GlyphItem(**item_data.model_dump())
         db.add(db_item)
         added_items.append(db_item)
+    
+    db.commit()
+    db.refresh()
 
     return added_items
 
