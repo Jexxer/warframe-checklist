@@ -30,6 +30,7 @@ def create_glyphs(glyphs: Union[GlyphSchema, List[GlyphSchema]], db: db_session)
 
     return added_items
 
+
 @router.get("/glyphs/", response_model=List[GlyphSchema])
 def get_glyphs(db: db_session):
     """
@@ -40,6 +41,7 @@ def get_glyphs(db: db_session):
     """
     items = db.query(GlyphItem).all()
     return items
+
 
 @router.get("/glyphs/{item_id}", response_model=GlyphSchema)
 def get_glyph(item_id: int, db: db_session):
