@@ -10,25 +10,6 @@ from src.gamedata.schemas import GlyphSchema
 router = APIRouter()
 
 
-@router.get("/test/")
-async def test_endpoint(db: db_session):
-    glyph_data = {
-        "category": "Glyphs",
-        "description": "A glyph depicting Equinox on a bright background.",
-        "imageName": "equinox-glyph---bright.png",
-        "masterable": False,
-        "name": "Equinox Glyph - Bright",
-        "tradable": False,
-        "uniqueName": "/Lotus/Types/StoreItems/AvatarImages/ImageEquinoxBright",
-    }
-
-    glyph_item = GlyphItem(**glyph_data)
-
-    # Add the GlyphItem to the session and commit the transaction
-    db.add(glyph_item)
-    db.commit()
-    return {"message": "success"}
-
 @router.post("/glyphs/", response_model=List[GlyphSchema])
 def create_glyphs(glyphs: Union[GlyphSchema, List[GlyphSchema]], db: db_session):
     """
