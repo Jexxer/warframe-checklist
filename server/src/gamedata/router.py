@@ -27,7 +27,7 @@ def create_glyphs(glyphs: Union[GlyphSchema, List[GlyphSchema]], db: db_session)
         db_item = GlyphItem(**item_data.model_dump())
         db.add(db_item)
         added_items.append(db_item)
-    
+
     db.commit()
     db.refresh()
 
@@ -44,6 +44,19 @@ def get_glyphs(db: db_session):
     """
     items = db.query(GlyphItem).all()
     return items
+
+
+@router.delete("/glyphs/")
+def delete_glyphs(db: db_session):
+    """
+    Delete all GlyphItems from the database
+
+    :param db: Database session dependency.
+    :return: None
+    """
+    db.query(GlyphItem).delete()
+    db.commit()
+    return None
 
 
 @router.get("/glyphs/{item_id}", response_model=GlyphSchema)
